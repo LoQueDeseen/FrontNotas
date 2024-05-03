@@ -1,0 +1,97 @@
+ /* estilo de  post-its*/
+
+ /* @import url("https://plantillashtmlgratis.com/wp-content/themes/helium/assets/css/helium.min.css"); */
+ /* *{
+    margin:0;
+    padding:0;
+  } */
+
+  /* h2,p{
+    font-size:100%;
+    font-weight:normal;
+  }
+  .listaNotas,.pegatina{
+    list-style:none;
+  }
+  .listaNotas{
+    overflow:hidden;
+    padding:3em;
+  }
+} 
+
+/*___________________________*/
+
+body{
+  font-family:arial,sans-serif;
+  font-size:100%;
+  
+  /* background-color: #EBEBEB; */
+  background-color:#ebf0f7;
+    
+  }
+
+aside{
+  padding: 10px;
+  background-color: white;
+  border-radius: 0px  10px 10px 0px;
+  min-height: 100vh;
+  box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+
+}
+
+.header-side-bar{
+  height: 100px;
+  margin-top: 10px;
+  border-bottom: 1px solid rgb(99, 99, 99);
+}
+
+.side-bar li{
+  padding: 8px;
+  border-bottom: 1px solid rgb(99, 99, 99);
+}
+
+.side-bar li a{
+  text-decoration: none;
+  color: #2e2e2f;
+  text-transform: uppercase;
+
+}
+
+.content-title{
+  width: 95%;
+  margin: 10px ;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+}
+
+.lista-notas{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-column-gap: 1.5rem;
+  width: 95%;
+  margin: 20px 10px;
+}
+
+.nota{
+  background: #ffc;
+  box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+  padding: 1em;
+  max-height: 200px;
+  /* border: 0.1px dotted #2e2e2f; */
+  border-radius: 2px;
+  text-transform: capitalize;
+}
+
+.btn-circle{
+  width: 50px;
+  padding: 10px;
+  border-radius: 30px;
+  font-size: larger;
+  font-weight:bolder ;
+  color: white;
+  background-color: #2e2e2f;
+  border: 1px solid #2e2e2f;
+  margin-left: 20px;
+}
