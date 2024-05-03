@@ -1,196 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Notas</title>
 
-    <link rel="stylesheet" href=".\assets\css\styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/styles.css">
     <script src=".\assets\js\script.js" defer></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
-<body>
-    <div class="back-to-top">
-        <button class="btn btn-ui"><i class="fa fa-angle-up"></i></button>
-    </div>
-
-    
    
-    
-    <div class="site-outer-wrap">
+</head>
 
-        <div class="site-wrap">
+<body>
+    <main class="main">
+        <div class="row">
+            <div class="col-md-2">
+                <aside class="side-bar">
+                    <div class="header-side-bar">
+                        <p>Descriocion proyecto</p>
+                        <a>Notes</a>
+                    </div>
+                    <nav class="nav flex-column ">
+                        <li class="nav-item"><a href="">Español</a></li>
+                        <li class="nav-item"><a href="">Ingles</a></li>
+                        <li class="nav-item"><a href="">Inicio</a></li>
+                        <li>
 
-            <header class="header" itemscope="" itemtype="http://schema.org/WPHeader">
-
-                <div class="header-content-wrap">
-
-                    <div class="header-content">
-
-                        <div class="header-content-top">
-                            <div class="header-links">
-                                <ul class="inline-list"><li class="ajax-search-link">
-                                        <a href="#"><i class="fa fa-search"></i></a>
-                                    </li></ul>
+                            <button onclick="window.crearCategoriaModal.showModal();">Crear
+                                categoría</button>
+                            </li>
+                        <li>
+                            
+                            <select name="" id="selectCategoria" class="form-select">
+                            </select>
+                        </li>
+                    </nav>
+                </aside>
+            </div>
+            <div class="col-md-10">
+                <section class="content">
+                    <div class="content-title">
+                        <h3>Category Name</h3>
+                    </div>
+                    <div class="main-content ">
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn-lg btn-dark btn-circle">+</button>
                             </div>
-
-                            <div class="brand">
-                                <div class="site-logo site-logo--image">
-                                    <a href="https://plantillashtmlgratis.com/" class="custom-logo-link" rel="home">
-                                        <img width="1471" height="150" src="" class="custom-logo" alt="Plantillas HTML Gratuitas" >
-                                    </a>
-                                </div><div class="tagline">notas</div></div>
-                            <!--boton de menu que desplegará un modal de acciones-->
-                            <button class="header-toggle btn btn-ui" ></button>
+                            <div class="col"><span>Total Notas: 3</span></div>
+                        </div>
+                        <div class="lista-notas">
+                            <div class="nota pegatina">
+                                <div class="card-body">
+                                    <h3>title #1</h3>
+                                    <p>text content 1</p>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-sm">edit</button>
+                                </div>
+                            </div>
+                            <div class="nota pegatina">
+                                <div class="card-body">
+                                    <h3>title #1</h3>
+                                    <p>text content 1</p>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-sm">edit</button>
+                                </div>
+                            </div>
+                            <div class="nota pegatina">
+                                <div class="card-body">
+                                    <h3>title #1</h3>
+                                    <p>text content 1</p>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-sm">edit</button>
+                                </div>
+                            </div>
+                     
 
                         </div>
-
-                        <div class="header-content-bottom">
-
-                            <nav class="main-nav" >
-                                <ul id="menu-menu-1" class="menu">
-                                   <!--Idiomas-->
-                                    <li id="menu-item-15435-es" class="lang-item la menu-item-object-custom menu-item-15435-es">
-                                        <a href="" lang="es-ES">
-                                            <span style="margin-left:0.3em;">Español</span>
-                                        </a>
-                                    </li>
-                                    
-                                    <li id="menu-item-15435-en" class="lang-item lang-item-230 lang-item-en menu-item menu-item-type-custom menu-item-object-custom menu-item-15435-en">
-                                        <a href="">
-                                            <span style="margin-left:0.3em;">English</span>
-                                        </a>
-                                    </li>
-                                    <!--Fin Idiomas-->
-                                    
-                                    <li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-37">
-                                        <a href="https://plantillashtmlgratis.com/">Inicio</a>
-                                    </li>
-                                    
-                                    <!--Menù categorìas-->
-
-                                    <li id="" class="listaCategorias">
-
-                                        
-                                        <button onclick="window.crearCategoriaModal.showModal();">Crear categoría</button>
-                                        <select name="" id="selectCategoria">
-                                            
-
-                                        </select>
-
-                                        <!-- <a href="">Lista de categorìas</a>
-                                        <span class=""></span>
-
-                                        <ul class="sub-menu" id="ulDeCategorìas">
-
-                                            <li id="menu-item" class="menu-item" >
-                                                <a href="">Cena</a>
-                                            </li>
-                                            
-                                            <li id="menu-item" class="menu-item ">
-                                                <a href="">Lista supermercado</a>
-                                            </li>
-                                        </ul>     -->
-                                    </li>
-                                    <!--fin de menu de categorias-->
-                                </ul>
-                            </nav>                
-
-   
-                            
                     </div>
+                </section>
+            </div>
+        </div>
+    </main>
 
-                </div>
-
-            </header><div class="content-area-wrap">
-
-    <div class="content-area">
+    <!-- Modal crear crear categorias -->
+    <dialog id="crearCategoriaModal">
+        <div class="card" >
+            <div class="card-body">
+                <h5 class="card-title">Crear Categoría</h5>
+                <form id="crearCategoriaForm">
+                    <div class="form-group">
+                        <label for="nombreCategoria">Nombre:</label>
+                        <input type="text" id="nombreCategoria" name="nombreCategoria" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="estadoCategoria">Estado:</label>
+                        <select id="estadoCategoria" name="estadoCategoria" class="form-select" required>
+                            <option value="activo">Visible</option>
+                            <option value="inactivo">Oculto</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button onclick="window.crearCategoriaModal.close();">Cancelar</button>
         
-        <!--titulo-->
-        <div class="content-header">
-
-            <div class="content-header-affix clearfix"><h1 class="content-title">Categorìa Nombre				</h1>
-
-            </div>
-
-        </div>
-        <!--fin titulo-->
-
-        <!--tablero-->
-
-        <div class="content-wrap">
-
-            <div class="content-box clearfix">
-
-                <div class="content-wrap-inner">
-                    <ul class="listaNotas" >
-                        <li class="pegatina">
-                          <a href="#">
-                            <h2>Title #1</h2>
-                            <p>Text Content #1</p>
-                          </a>
-                        </li>
-                        <li class="pegatina">
-                          <a href="#">
-                            <h2>Title #2</h2>
-                            <p>Text Content #2</p>
-                          </a>
-                        </li>
-                        <li class="pegatina">
-                          <a href="#">
-                            <h2>Title #3</h2>
-                            <p>Text Content #3</p>
-                          </a>
-                        </li>
-                        <li>
-                    </ul>        
-
-
-                </div>
-
-            </div>
-
-            
-        </div>
-
-        <!--fin tablero-->
-
-    </div>
-
-</div>
-
-        </div>
-
-    </div>
+                        <button type="button" id="guardar">Guardar</button>
+                    </div>
+                </form>
     
-   
-
-
-    
-
+            </div>
+        </div>
 </body>
-<dialog id="crearCategoriaModal">
-    <div>
-      <h5>Crear Categoría</h5>
-      <form id="crearCategoriaForm">
-        <div>
-          <label for="nombreCategoria">Nombre</label>
-          <input type="text" id="nombreCategoria" name="nombreCategoria" required>
-        </div>
-        <div>
-          <label for="estadoCategoria">Estado</label>
-          <select id="estadoCategoria" name="estadoCategoria" required>
-            <option value="activo">Visible</option>
-            <option value="inactivo">Oculto</option>
-          </select>
-        </div>
-        <div>
-            <button onclick="window.crearCategoriaModal.close();">Cancelar</button>
-
-          <button type="button" id="guardar">Guardar</button>
-        </div>
-      </form>
-    </div>
-  </dialog>
+</dialog>
 
 </html>
