@@ -20,19 +20,22 @@ let promesaListarCategories = fetch("http://localhost:5088/api/categories")
 
 })
 
+//Crear categorísas
 
 let BotonCrearCategoria= document.getElementById("guardar");
-console.log("boton"+BotonCrearCategoria);
+
 
 BotonCrearCategoria.addEventListener('click',  ()=> {
-    let nombre = document.getElementById("nombreCategoria")
-    let estado = document.getElementById("estadoCategoria")
+    let nombre = document.getElementById("nombreCategoria");
+    
+    let date =  new Date();
+    console.log (date);
     
 
     let category = {
         Name: nombre.value,
-        Status: estado.value ,
-        Create_at:null,
+        Status: "visible",
+        Create_at:date,
         Update_at:null
     };
 
@@ -47,3 +50,5 @@ BotonCrearCategoria.addEventListener('click',  ()=> {
     .then(r => { r.json()}).catch(errors => console.log(errors))
 
 });
+
+//Fin de crear categorías
