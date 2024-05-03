@@ -42,7 +42,9 @@
             <div class="col-md-10">
                 <section class="content">
                     <div class="content-title">
-                        <h3>Category Name</h3>
+                        <h3 id="categoryName">Category Name</h3>
+                        <button onclick="window.editarCategoriaModal.showModal();">Editar nombre de la categoría</button>
+
                     </div>
                     <div class="main-content ">
                         <div class="row">
@@ -88,6 +90,11 @@
         </div>
     </main>
 
+    <footer>
+        <button id="eliminarCategorie"> EliminarCategoría</button>
+    </footer>
+    
+
     <!-- Modal crear crear categorias -->
     <dialog id="crearCategoriaModal">
         <div class="card" >
@@ -118,5 +125,30 @@
         <script src="./assets/js/notes.js"></script>
 </body>
 </dialog>
+<!--Dialog de editar-->
+
+<dialog id="editarCategoriaModal">
+    <div class="card" >
+        <div class="card-body">
+            <h5 class="card-title">Crear Categoría</h5>
+            <form id="crearCategoriaForm">
+                <div class="form-group">
+                    <label for="nombreCategoria">Nombre:</label>
+                    <input type="text" id="nuevoNombreCategoria" name="nombreCategoria" required>
+                </div>
+                
+                <div>
+                    <button onclick="window.editarCategoriaModal.close();">Cancelar</button>
+    
+                    <button type="button" id="guardarNuevoNombreCategoria">Guardar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</body>
+</dialog>
+
+
 
 </html>
