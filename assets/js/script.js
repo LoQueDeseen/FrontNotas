@@ -1,6 +1,12 @@
 console.log("Funciona!");
+let selectCategorias = document.getElementById("selectCategoria");
+let ListaDecategorias = [];
 
-let selectCategorias = document.getElementById("selectCategoria")
+
+
+
+////////////////INICIO DEL CRUD/////////
+
 
 let promesaListarCategories = fetch("http://localhost:5088/api/categories")
 .then(response =>{
@@ -13,8 +19,10 @@ let promesaListarCategories = fetch("http://localhost:5088/api/categories")
     let title = element.Name;
     let body  = element.Status;
     console.log(element);
+    ListaDecategorias.push(element);
 
-    selectCategoria.innerHTML +=`<option value="">${element.name}</option>`
+
+    selectCategoria.innerHTML +=`<option value="${element.id}">${element.name}</option>`
     
  });
 
@@ -52,3 +60,40 @@ BotonCrearCategoria.addEventListener('click',  ()=> {
 });
 
 //Fin de crear categorías
+
+//Actualizar nombre de categoría
+
+let BotonEditarNombreCategoria= document.getElementById("guardarNuevoNombreCategoria");
+
+
+BotonEditarNombreCategoria.addEventListener('click',  ()=> {
+    let nombre = document.getElementById("nuevoNombreCategoria");
+    
+    let date =  new Date();
+    console.log ("select :"+selectCategorias.value);
+    
+
+    let category = {
+        Id: selectCategorias.value,
+        Name: nombre.value,
+        Status: "visible",
+        Create_at:date,
+        Update_at:date
+    };
+
+    console.log(category);
+    console.log("categoria"+category);
+    
+    let promesaEditarCategorie =  fetch(`http://localhost:5088/api/Categories/${selectCategorias.value}`, 
+    {
+        method: 'PUT',
+    body: JSON.stringify(category),
+    headers: {'Content-Type':'application/json'}} )
+    .then(r => { r.json()}).catch(errors => console.log(errors))
+
+});
+
+ //FIN DEL CRUD
+
+ Titulo.setAttribute("placeholder",selectCategoria.value);
+

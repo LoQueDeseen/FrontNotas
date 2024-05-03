@@ -64,7 +64,7 @@
                                     <!--Fin Idiomas-->
                                     
                                     <li id="menu-item-37" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-37">
-                                        <a href="https://plantillashtmlgratis.com/">Inicio</a>
+                                        <a href="">Inicio</a>
                                     </li>
                                     
                                     <!--Menù categorìas-->
@@ -78,19 +78,7 @@
 
                                         </select>
 
-                                        <!-- <a href="">Lista de categorìas</a>
-                                        <span class=""></span>
-
-                                        <ul class="sub-menu" id="ulDeCategorìas">
-
-                                            <li id="menu-item" class="menu-item" >
-                                                <a href="">Cena</a>
-                                            </li>
-                                            
-                                            <li id="menu-item" class="menu-item ">
-                                                <a href="">Lista supermercado</a>
-                                            </li>
-                                        </ul>     -->
+                  
                                     </li>
                                     <!--fin de menu de categorias-->
                                 </ul>
@@ -109,7 +97,12 @@
         <!--titulo-->
         <div class="content-header">
 
-            <div class="content-header-affix clearfix"><h1 class="content-title">Categorìa Nombre				</h1>
+            <div class="content-header-affix clearfix">
+                
+                 <h1 class="content-title" id="tituloCategorie">Categorìa Nombre</h1> 
+                 <button onclick="window.editarCategoriaModal.showModal();">Editar nombre de la categoría</button>
+
+
 
             </div>
 
@@ -188,6 +181,24 @@
             <button onclick="window.crearCategoriaModal.close();">Cancelar</button>
 
           <button type="button" id="guardar">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+  <!--Dialog de editar-->
+  <dialog id="editarCategoriaModal">
+    <div>
+      <h5>Cambiar nombre</h5>
+      <form id="crearCategoriaForm">
+        <div>
+          <label for="nombreCategoria">Nombre</label>
+          <input type="text" id="nuevoNombreCategoria" name="nombreCategoria" required>
+        </div>
+        
+        <div>
+            <button onclick="window.editarCategoriaModal.close();">Cancelar</button>
+
+          <button type="button" id="guardarNuevoNombreCategoria">Guardar</button>
         </div>
       </form>
     </div>
