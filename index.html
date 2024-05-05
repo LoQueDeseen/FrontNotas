@@ -28,7 +28,7 @@
                         <li class="nav-item"><a href="">Inicio</a></li>
                         <li>
 
-                            <button onclick="window.crearCategoriaModal.showModal();">Crear
+                            <button class="btn btn-primary" onclick="window.crearCategoriaModal.showModal();">Crear
                                 categoría</button>
                         </li>
                         <li>
@@ -46,7 +46,7 @@
                 <section class="content">
                     <div class="content-title">
                         <h3 id="categoryName">Category Name</h3>
-                        <button onclick="window.editarCategoriaModal.showModal();">Editar nombre de la
+                        <button class="btn btn-primary" onclick="window.editarCategoriaModal.showModal();">Editar nombre de la
                             categoría</button>
 
                     </div>
@@ -76,7 +76,7 @@
     <dialog id="crearCategoriaModal">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Crear Categoría</h5>
+                <h3 class="card-title">Crear Categoría</h3>
                 <form id="crearCategoriaForm">
                     <div class="form-group">
                         <label for="nombreCategoria">Nombre:</label>
@@ -89,10 +89,10 @@
                             <option value="inactivo">Oculto</option>
                         </select>
                     </div>
-                    <div>
-                        <button onclick="window.crearCategoriaModal.close();">Cancelar</button>
+                    <div class="card-footere"><br>
+                        <button class="btn btn-secondary" onclick="window.crearCategoriaModal.close();">Cancelar</button>
 
-                        <button type="button" id="guardar">Guardar</button>
+                        <button type="button" id="guardar" class="btn btn-dark">Guardar</button>
                     </div>
                 </form>
 
@@ -105,17 +105,17 @@
 <dialog id="editarCategoriaModal">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Crear Categoría</h5>
+            <h3 class="card-title">Editar Categoría</h3>
             <form id="crearCategoriaForm">
                 <div class="form-group">
                     <label for="nombreCategoria">Nombre:</label>
-                    <input type="text" id="nuevoNombreCategoria" name="nombreCategoria" required>
+                    <input type="text" id="nuevoNombreCategoria" name="nombreCategoria" class="form-control" required>
                 </div>
 
-                <div>
-                    <button onclick="window.editarCategoriaModal.close();">Cancelar</button>
+                <div class="form-group"><br>
+                    <button class="btn btn-secondary" onclick="window.editarCategoriaModal.close();">Cancelar</button>
 
-                    <button type="button" id="guardarNuevoNombreCategoria">Guardar</button>
+                    <button class="btn btn-dark" type="button" id="guardarNuevoNombreCategoria">Guardar</button>
                 </div>
             </form>
 
@@ -127,8 +127,8 @@
 <div class="modal" id="myModal">
     <div class="modal-content">
         <div class="modal-header">
-            <span class="close">&times;</span>
             <h3>Registrar Nota</h3>
+            <span class="close float-end">&times;</span>
         </div>
         <div class="modal-body">
             <form action="" name="formNote">

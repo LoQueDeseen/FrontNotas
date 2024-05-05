@@ -104,7 +104,8 @@ async function addNote(){
     });
   
     if(request.status == 200 || request.ok == true){
-      loadNotes();
+      closeModal();
+      loadNotes(parseInt(input_category));
     }else{
       console.log("Error al crear la nota, intente más tarde!");
     }
