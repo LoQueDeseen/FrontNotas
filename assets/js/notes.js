@@ -68,8 +68,8 @@ function generateContent(data){
                             </div>
                         </div>
                         <div class="card-footer ">
-                            <button class="btn btn-sm btn-primary" onclick="editNote(${element.id});"><i class="fa-solid fa-pencil"></i>Edit</button>
-                            <button class="btn btn-sm btn-danger" onclick="deleteNote(${element.id});"><i class="fa-solid fa-trash"></i>Delete</button>
+                            <button class="btn btn-sm btn-primary" onclick="editNote(${element.id});"><i class="bi bi-pencil-square"></i></button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteNote(${element.id});"><i class="bi bi-trash"></i></button>
                         </div>
                     </div>`;
         listNotes.innerHTML += nota;
