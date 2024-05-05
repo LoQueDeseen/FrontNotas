@@ -3,6 +3,9 @@ let selectCategorias = document.getElementById("selectCategoria");
 let ListaDecategorias = [];
 let categoryName = document.getElementById("categoryName");
 
+
+const divPills = document.getElementById("pills");
+
 function guardarValorSeleccionado() {
     let selectedCategoryId = selectCategoria.value;
     localStorage.setItem('selectedCategoryId', selectedCategoryId);
@@ -37,10 +40,15 @@ let promesaListarCategories = fetch("http://localhost:5088/api/categories")
     let body  = element.Status;
     //console.log(element);
     ListaDecategorias.push(element);
-
-
     selectCategoria.innerHTML +=`<option value="${element.id}">${element.name}</option>`
     
+
+    let pill = document.createElement("a");
+    pill.classList.add("pill");
+    pill.setAttribute("onclick",`loadNotes(${element.id})`);
+    pill.innerText= element.name;
+    divPills.appendChild(pill);
+
  });
 
 })

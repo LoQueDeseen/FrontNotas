@@ -3,26 +3,47 @@ const btnCreate = document.getElementById("btn-Create");
 const date = new Date();
 
 //Cargar Notas 
-async function loadNotes(){
+async function loadNotes(categoria){
+  console.log(categoria);
 
    let requestC = await fetch("http://localhost:5088/api/categories");
    let responseC= await requestC.json();
 
-    let category = responseC[0];
-  
-    let request = await fetch("http://localhost:5088/api/notes");
-    let response = await request.json();
+   let request = await fetch("http://localhost:5088/api/notes");
+   let response = await request.json();
 
-    let filterCategorie = response.filter(e => e.idCategory == category.id && e.status != "Oculta");
+   let filterCategory = null;
 
-    let titleCategory = document.getElementById("categoryName");
-    let idCategory = document.getElementById("categoryId");
+   let titleCategory = document.getElementById("categoryName");
+   let idCategory = document.getElementById("categoryId");
+   let categoriaActiva = null;
 
-    titleCategory.innerText = category.name;
-    idCategory.value = category.id;
+   if(categoria == 0){
+      //traer la primera de las categories si no hay nada 
+     console.log("Esta vacia");
+     categoriaActiva = responseC[0];
+     filterCategory = response.filter(e => e.idCategory == categoriaActiva.id && e.status != "Oculta");
+     
+     titleCategory.innerText = categoriaActiva.name;
+     idCategory.value = categoriaActiva.id;
+
+    }else{
+
+      console.log("Esta llena");
+
+      categoriaActiva = responseC.find(c => c.id === categoria);
+      console.log(categoriaActiva);
+
+      filterCategory = response.filter(e => e.idCategory == categoriaActiva.id && e.status != "Oculta");
+      console.log(filterCategory);
+      titleCategory.innerText = categoriaActiva.name;
+      idCategory.value = categoriaActiva.id;
+     
+   }
+   
 
 
-    generateContent(filterCategorie);
+    generateContent(filterCategory);
 }
 
 
@@ -32,19 +53,23 @@ function generateContent(data){
     
     let spanTotal = document.getElementById("totalNotes");
     let listNotes = document.getElementById("lista-notas");
+    listNotes.innerHTML = "";
 
     spanTotal.innerText = totalNotes;
     
     data.forEach(element => {
         
         let nota = `<div class="nota pegatina">
+                        <h3 class="card-title">${element.title}</h3>
                         <div class="card-body">
-                            <h3 class="card-title">${element.title}</h3>
                             <p>${element.body}</p>
+                            <div class="d-flex">
+                            <span class="fecha float-end">${element.create_at}</span>
+                            </div>
                         </div>
-                        <div class="card-footer">
-                            <button class="btn  btn-primary"><i class="fa-solid fa-pencil"></i>Edit</button>
-                             <span class="fecha">${element.create_at}</span>
+                        <div class="card-footer ">
+                            <button class="btn btn-sm btn-primary" onclick="editNote(${element.id});"><i class="fa-solid fa-pencil"></i>Edit</button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteNote(${element.id});"><i class="fa-solid fa-trash"></i>Delete</button>
                         </div>
                     </div>`;
         listNotes.innerHTML += nota;
@@ -78,19 +103,32 @@ async function addNote(){
       headers: { "Content-Type": "application/json" },
     });
   
-   console.log(request);   
+    if(request.status == 200 || request.ok == true){
+      loadNotes();
+    }else{
+      console.log("Error al crear la nota, intente más tarde!");
+    }
+   
 }else{
   let message = "Los campos obligatorios están vacios";
   console.log(message);
   }
+}
 
 
+function deleteNote(id){
 
+  console.log("ocultar"+id);
+}
+
+
+function editNote(id) {
+  console.log("editar"+id);
 }
 
 
 // llamar la funcoin cuando cargue el DOM
-window.addEventListener("DOMContentLoaded", loadNotes);
+window.addEventListener("DOMContentLoaded", loadNotes(0));
 
 
 // Modal notas 
@@ -102,12 +140,15 @@ btnModal.onclick = function () {
   modal.style.display = "block";
 };
 
-span.onclick = function () {
-  modal.style.display = "none";
-};
+span.addEventListener("click", closeModal)
 
 window.onclick = function (event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
 }; 
+
+
+function closeModal(){
+  modal.style.display = "none";
+}

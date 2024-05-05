@@ -54,7 +54,33 @@ aside{
   text-decoration: none;
   color: #2e2e2f;
   text-transform: uppercase;
+}
 
+.pills{
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+}
+
+.pill{
+  color: #2e2e2f;
+  text-decoration: none;
+  border: 1px solid #2e2e2f;
+  padding: 5px 5px;
+  border-radius: 16px;
+  font-size: 1rem;
+  text-align: center;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.pill:hover{
+  box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+  transition: 0.2s;
+  background-color: #2e2e2f;
+  color: white;
+  
 }
 
 .content-title{
@@ -86,12 +112,37 @@ aside{
   /* border: 0.1px dotted #2e2e2f; */
   border-radius: 2px;
   text-transform: capitalize;
+  margin-bottom: 15px;
 }
 
 .nota span{
+  text-align: end;
   font-size: 14px;
-  width: 40%;
+  width: 100%;
   color: #7d8186;
+  margin-top:40px;
+}
+
+.nota .card-body {
+
+  margin-top: 10px;
+  justify-content: flex-start;
+}
+
+.nota .card-footer{
+  /* display: none; */
+  visibility: hidden;
+}
+
+.nota:hover{
+  cursor: pointer;
+  box-shadow: rgba(99, 99, 99, 0.1) 0px 4px 12px 0px;
+  transition: 0.3s;
+}
+.nota:hover .card-footer{
+  /* display: block; */
+  visibility: visible;
+  transition: 0.4s;
 }
 
 .btn-circle{
@@ -104,6 +155,10 @@ aside{
   background-color: #2e2e2f;
   border: 1px solid #2e2e2f;
   margin-left: 20px;
+}
+
+.hidden{
+  display: none;
 }
 
 
