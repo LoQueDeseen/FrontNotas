@@ -35,7 +35,7 @@ let promesaListarCategories = fetch("http://localhost:5088/api/categories")
  data.forEach( function (element){
     let title = element.Name;
     let body  = element.Status;
-    console.log(element);
+    //console.log(element);
     ListaDecategorias.push(element);
 
 

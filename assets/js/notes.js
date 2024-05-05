@@ -1,26 +1,32 @@
+const btnCreate = document.getElementById("btn-Create");
 
+const date = new Date();
 
+//Cargar Notas 
 async function loadNotes(){
 
    let requestC = await fetch("http://localhost:5088/api/categories");
    let responseC= await requestC.json();
 
     let category = responseC[0];
-    
-
+  
     let request = await fetch("http://localhost:5088/api/notes");
     let response = await request.json();
 
     let filterCategorie = response.filter(e => e.idCategory == category.id && e.status != "Oculta");
 
     let titleCategory = document.getElementById("categoryName");
+    let idCategory = document.getElementById("categoryId");
 
     titleCategory.innerText = category.name;
+    idCategory.value = category.id;
 
 
     generateContent(filterCategorie);
 }
 
+
+//Generar contenido de las notas
 function generateContent(data){
     let totalNotes = data.length;
     
@@ -45,6 +51,45 @@ function generateContent(data){
     });
 }
 
+
+btnCreate.addEventListener("click", addNote);
+
+async function addNote(){
+  let input_title = document.formNote.title.value;
+  let input_content = document.formNote.content.value;
+  let input_category = document.formNote.categoryId.value;
+
+  if(input_title != ""  && input_content !=""){
+    
+    let nota = {
+      Title: input_title,
+      Body: input_content,
+      Status: "Activa",
+      Create_at: date,
+      Updated_at :null,
+      idCategory: parseInt(input_category)
+      
+    }
+    console.log(nota);
+
+    let request = await fetch("http://localhost:5088/api/Notes", {
+      method: "POST",
+      body: JSON.stringify(nota),
+      headers: { "Content-Type": "application/json" },
+    });
+  
+   console.log(request);   
+}else{
+  let message = "Los campos obligatorios están vacios";
+  console.log(message);
+  }
+
+
+
+}
+
+
+// llamar la funcoin cuando cargue el DOM
 window.addEventListener("DOMContentLoaded", loadNotes);
 
 
