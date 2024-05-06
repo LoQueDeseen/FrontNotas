@@ -1,10 +1,8 @@
-console.log("Funciona!");
 let selectCategorias = document.getElementById("selectCategoria");
 let ListaDecategorias = [];
 let categoryName = document.getElementById("categoryName");
-
-
 const divPills = document.getElementById("pills");
+
 
 function guardarValorSeleccionado() {
     let selectedCategoryId = selectCategoria.value;
@@ -21,19 +19,13 @@ function restaurarValorSeleccionado() {
 selectCategoria.addEventListener('change', guardarValorSeleccionado);
 
 
-
-
 ////////////////INICIO DEL CRUD/////////
-
 
 let promesaListarCategories = fetch("http://localhost:5088/api/categories")
 .then(response =>{
     return response.json()
 })
 .then(data =>{
-
-    
-
 
  data.forEach( function (element){
     let title = element.Name;
@@ -54,11 +46,9 @@ let promesaListarCategories = fetch("http://localhost:5088/api/categories")
 })
 
 
-
 //Crear categorísas
 
 let BotonCrearCategoria= document.getElementById("guardar");
-
 
 BotonCrearCategoria.addEventListener('click',  ()=> {
     let nombre = document.getElementById("nombreCategoria");
@@ -74,7 +64,7 @@ BotonCrearCategoria.addEventListener('click',  ()=> {
         Update_at:null
     };
 
-    console.log(category);
+    /* console.log(category); */
     console.log("categoria"+category);
     
     let promesaCrearCategorie =  fetch("http://localhost:5088/api/Categories", 
@@ -108,7 +98,7 @@ BotonEditarNombreCategoria.addEventListener('click',  ()=> {
         Update_at:date
     };
 
-    console.log(category);
+    /* console.log(category); */
     console.log("categoria"+category);
     
     let promesaEditarCategorie =  fetch(`http://localhost:5088/api/Categories/${selectCategorias.value}`, 

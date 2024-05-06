@@ -43,9 +43,14 @@
             <div class="col-md-10">
                 <section class="content">
                     <div class="content-title">
-                        <h3 id="categoryName">Category Name</h3>
-                        <button class="btn btn-primary" onclick="window.editarCategoriaModal.showModal();">Editar nombre de la
-                            categoría</button>
+                        <h2 id="categoryName">Category Name</h3>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <button class="btn btn-sm btn-primary" onclick="window.editarCategoriaModal.showModal();"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-sm btn-secondary" id="eliminarCategorie"><i class="bi bi-trash"></i></button>
+                            </div>
+
+                        </div>
 
                     </div>
                     <div class="main-content ">
@@ -65,10 +70,7 @@
         </div>
     </main>
 
-    <footer>
-        <button id="eliminarCategorie"> EliminarCategoría</button>
-    </footer>
-
+    
 
     <!-- Modal crear crear categorias -->
     <dialog id="crearCategoriaModal">

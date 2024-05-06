@@ -92,7 +92,7 @@ aside{
   box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
 }
 
-.content-title h3{
+.content-title h2{
   text-transform: capitalize;
 }
 
@@ -116,11 +116,10 @@ aside{
 }
 
 .nota span{
-  text-align: end;
-  font-size: 14px;
+  font-size: 10px;
   width: 100%;
   color: #7d8186;
-  margin-top:40px;
+  justify-content: center;
 }
 
 .nota .card-body {
@@ -129,7 +128,11 @@ aside{
   justify-content: flex-start;
 }
 
-.nota .card-footer{
+.card-footer{
+
+}
+
+.nota .card-btns{
   /* display: none; */
   visibility: hidden;
 }
@@ -139,7 +142,7 @@ aside{
   box-shadow: rgba(99, 99, 99, 0.1) 0px 4px 12px 0px;
   transition: 0.3s;
 }
-.nota:hover .card-footer{
+.nota:hover .card-btns{
   /* display: block; */
   visibility: visible;
   transition: 0.4s;

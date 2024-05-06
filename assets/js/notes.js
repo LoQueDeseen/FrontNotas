@@ -10,7 +10,7 @@ btnupdate.style.display = "none";
 
 //Cargar Notas
 async function loadNotes(categoria) {
-  console.log(categoria);
+  
 
   let requestC = await fetch("http://localhost:5088/api/categories");
   let responseC = await requestC.json();
@@ -26,7 +26,6 @@ async function loadNotes(categoria) {
 
   if (categoria == 0) {
     //traer la primera de las categories si no hay nada
-    console.log("Esta vacia");
     categoriaActiva = responseC[0];
     filterCategory = response.filter(
       (e) => e.idCategory == categoriaActiva.id && e.status != "Oculta"
@@ -35,7 +34,6 @@ async function loadNotes(categoria) {
     titleCategory.innerText = categoriaActiva.name;
     idCategory.value = categoriaActiva.id;
   } else {
-    console.log("Esta llena");
 
     categoriaActiva = responseC.find((c) => c.id === categoria);
     console.log(categoriaActiva);
@@ -67,12 +65,19 @@ function generateContent(data) {
                         <div class="card-body">
                             <p>${element.body}</p>
                             <div class="d-flex">
-                            <span class="fecha float-end">${element.create_at}</span>
                             </div>
-                        </div>
-                        <div class="card-footer ">
-                            <button class="btn btn-sm btn-primary" onclick="modalEditar(${element.id});"><i class="bi bi-pencil-square"></i></button>
-                            <button class="btn btn-sm btn-secondary" onclick="deleteNote(${element.id});"><i class="bi bi-eye-slash"></i></button>
+                            </div>
+                            <div class="card-footer ">
+                            <div class="row">
+                            <div class="card-btns col-md-6">
+                              <button class="btn btn-sm btn-primary" onclick="modalEditar(${element.id});"><i class="bi bi-pencil-square"></i></button>
+                              <button class="btn btn-sm btn-secondary" onclick="deleteNote(${element.id});"><i class="bi bi-eye-slash"></i></button>
+
+                            </div>
+                            <div class="col-md-6">
+                              <span class="fecha float-end">${element.create_at}</span>
+                            </div>
+                          </div>
                         </div>
                     </div>`;
     listNotes.innerHTML += nota;
@@ -104,10 +109,13 @@ async function addNote() {
       headers: { "Content-Type": "application/json" },
     });
 
+    let response = await request.json();
+    console.log(response);
+
     if (request.status == 200 || request.ok == true) {
       restauarModal();
       closeModal();
-      loadNotes(parseInt(input_category));
+      loadNotes(response.idCategory);
     } else {
       console.log("Error al crear la nota, intente más tarde!");
     }
@@ -149,6 +157,7 @@ async function editNote(){
   let idNote = input_id.value;
   if (input_title.value != "" && input_content.value != "") {
     let nota = {
+      id: idNote,
       Title: input_title.value,
       Body: input_content.value,
       Status: "Activa",
@@ -167,7 +176,7 @@ async function editNote(){
     if (request.status == 200 || request.ok == true) {
       restauarModal();
       closeModal();
-      loadNotes(parseInt(input_category));
+      loadNotes(parseInt(input_category.value));
     } else {
       console.log("Error al editarla nota, intente más tarde!");
     }
@@ -181,7 +190,7 @@ async function editNote(){
 async function deleteNote(id) {
   console.log("ocultar" + id);
 
-  let request = await fetch(`http://localhost:5088/apiNotes/${id}`)
+  let request = await fetch(`http://localhost:5088/apiNotes/${id}`);
   // .then(r => r.json()).then(data => console.log(data));
   let response =  await request.json();
 
@@ -222,6 +231,7 @@ async function deleteNote(id) {
   }
 
 }
+
 
 // llamar la funcoin cuando cargue el DOM
 window.addEventListener("DOMContentLoaded", loadNotes(0));
