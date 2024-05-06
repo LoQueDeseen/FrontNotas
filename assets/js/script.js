@@ -71,7 +71,8 @@ BotonCrearCategoria.addEventListener('click',  ()=> {
         Name: nombre.value,
         Status: "visible",
         Create_at:date,
-        Update_at:null
+        Update_at:null,
+        UserId: 1
     };
 
     console.log(category);
@@ -95,29 +96,50 @@ let BotonEditarNombreCategoria= document.getElementById("guardarNuevoNombreCateg
 
 BotonEditarNombreCategoria.addEventListener('click',  ()=> {
     let nombre = document.getElementById("nuevoNombreCategoria");
-    
+
     let date =  new Date();
     console.log ("select :"+selectCategorias.value);
-    
 
-    let category = {
-        Id: selectCategorias.value,
-        Name: nombre.value,
-        Status: "visible",
-        Create_at:date,
-        Update_at:date
-    };
 
-    console.log(category);
-    console.log("categoria"+category);
-    
-    let promesaEditarCategorie =  fetch(`http://localhost:5088/api/Categories/${selectCategorias.value}`, 
-    {
-        method: 'PUT',
-    body: JSON.stringify(category),
-    headers: {'Content-Type':'application/json'}} )
-    .then(r => { r.json()}).catch(errors => console.log(errors))
 
+
+
+    fetch(`http://localhost:5088/api/Categories/${selectCategorias.value}`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('La solicitud para obtener los datos de la categoría original falló.');
+        }
+        return response.json();
+    })
+    .then(originalCategory => {
+        // Crear el objeto actualizado con todos los campos, modificando solo el nombre
+        let updatedCategory = {
+            ...originalCategory,
+            Name: nombre.value,
+            Update_at: date
+        };
+
+        // Hacer la solicitud PUT para actualizar la categoría
+        return fetch(`http://localhost:5088/api/Categories/${selectCategorias.value}`, {
+            method: 'PUT',
+            body: JSON.stringify(updatedCategory),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('La solicitud de actualización falló.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Categoría actualizada:', data);
+    })
+    .catch(error => {
+        console.error('Error al actualizar la categoría:', error);
+    });
 });
 
 //eliminar categoria
