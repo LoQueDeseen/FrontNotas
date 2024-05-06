@@ -1,6 +1,12 @@
 const btnCreate = document.getElementById("btn-Create");
-
+const btnupdate = document.getElementById("btn-Update");
+let input_id = document.formNote.idNota;
+let input_title = document.formNote.title;
+let input_content = document.formNote.content;
+let input_category = document.formNote.categoryId;
 const date = new Date();
+
+btnupdate.style.display = "none";
 
 //Cargar Notas
 async function loadNotes(categoria) {
@@ -65,7 +71,7 @@ function generateContent(data) {
                             </div>
                         </div>
                         <div class="card-footer ">
-                            <button class="btn btn-sm btn-primary" onclick="editNote(${element.id});"><i class="bi bi-pencil-square"></i></button>
+                            <button class="btn btn-sm btn-primary" onclick="modalEditar(${element.id});"><i class="bi bi-pencil-square"></i></button>
                             <button class="btn btn-sm btn-secondary" onclick="deleteNote(${element.id});"><i class="bi bi-eye-slash"></i></button>
                         </div>
                     </div>`;
@@ -77,21 +83,18 @@ btnCreate.addEventListener("click", addNote);
 
 //funcionalidad para agregar nota
 async function addNote() {
-  let input_title = document.formNote.title.value;
-  let input_content = document.formNote.content.value;
-  let input_category = document.formNote.categoryId.value;
+  
+  console.log(input_category.value);
 
-  console.log(input_category);
-
-  if (input_title != "" && input_content != "") {
+  if (input_title.value != "" && input_content.value != "") {
 
     let nota = {
-      Title: input_title,
-      Body: input_content,
+      Title: input_title.value,
+      Body: input_content.value,
       Status: "Activa",
       Create_at: date,
       Updated_at: null,
-      idCategory: parseInt(input_category),
+      idCategory: parseInt(input_category.value),
     };
     console.log(nota);
 
@@ -102,6 +105,7 @@ async function addNote() {
     });
 
     if (request.status == 200 || request.ok == true) {
+      restauarModal();
       closeModal();
       loadNotes(parseInt(input_category));
     } else {
@@ -114,43 +118,99 @@ async function addNote() {
 }
 
 //funcionalida para abrir modal de notas
-function editNote(id) {
+async function modalEditar(id) {
   console.log("editar" + id);
+  restauarModal();
+  modal.style.display = "block";
+  btnupdate.style.display = "block";
+  btnCreate.style.display = "none";
+
+  try{
+    let request = await fetch(`http://localhost:5088/api/Notes/${id}`);
+    let response = await request.json();
+
+    input_id.value = response.id;
+    input_title.value = response.title;
+    input_category.value = response.idCategory;
+    input_content.value = response.body;
+
+  console.log(response);
+  }catch(Error){
+    console.log("Error: "+ Error);
+  }
+
+}
+
+btnupdate.addEventListener("click", editNote);
+
+async function editNote(){
+
+  console.log("cvamos a editar lanota");
+  let idNote = input_id.value;
+  if (input_title.value != "" && input_content.value != "") {
+    let nota = {
+      Title: input_title.value,
+      Body: input_content.value,
+      Status: "Activa",
+      Create_at: date,
+      Updated_at: date,
+      idCategory: parseInt(input_category.value),
+    };
+    console.log(nota);
+
+    let request = await fetch(`http://localhost:5088/api/Notes/${idNote}`, {
+      method: "PUT",
+      body: JSON.stringify(nota),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (request.status == 200 || request.ok == true) {
+      restauarModal();
+      closeModal();
+      loadNotes(parseInt(input_category));
+    } else {
+      console.log("Error al editarla nota, intente más tarde!");
+    }
+  } else {
+    let message = "Los campos obligatorios están vacios";
+    console.log(message);
+  }
 }
 
 //funcionalida de ocultar notas
 async function deleteNote(id) {
   console.log("ocultar" + id);
 
-  let request = await fetch(`http://localhost:5088/api/Notes/${id}`)
-  .then(r => r.json()).then(data => console.log(data));
-  // let response = request.json();
+  let request = await fetch(`http://localhost:5088/apiNotes/${id}`)
+  // .then(r => r.json()).then(data => console.log(data));
+  let response =  await request.json();
 
   console.log(response);
   let nota = {
-    Id: response.id,
+    // Id: response.id,
     Title: response.title,
-    Body: response.title,
+    Body: response.content,
     Status: "Oculta",
     Create_at: response.create_at,
     Updated_at: date,
-    categoryId: response.categoryId 
+    idCategory: response.idCategory
 
   };
 
-  console.log(nota);
-
   try {
     
-    let requestUpdate = await fetch(`http://localhost:5088/api/Notes/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(response),
-    });
+    let requestUpdate = await fetch(
+      `http://localhost:5088/api/Notes/editNote/${id}`,
+      {
+        method: "PUT",
+        body: JSON.stringify(nota),
+        headers: { "Content-Type": "application/json" },
+      });
   
     let responseUpdate = requestUpdate.json();
   
-    if (responseUpdate.status == 200 || responseUpdate.ok) {
+    console.log(responseUpdate);
+    if (requestUpdate.status == 200 || requestUpdate.ok) {
       // refrescar las notas
       loadNotes(response.idCategory);
     } else {
@@ -185,4 +245,13 @@ window.onclick = function (event) {
 
 function closeModal() {
   modal.style.display = "none";
+  restauarModal();
+}
+
+
+function restauarModal(){
+
+  input_title.value = "";
+  input_category.value = "";
+  input_content.value = "";
 }
