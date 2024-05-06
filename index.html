@@ -8,9 +8,10 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
     <script src=".\assets\js\script.js" defer></script>
-   
+
 </head>
 
 <body>
@@ -19,7 +20,7 @@
             <div class="col-md-2">
                 <aside class="side-bar">
                     <div class="header-side-bar">
-                        <p>Descriocion proyecto</p>
+                        <p>Descripcion proyecto</p>
                         <a>Notes</a>
                     </div>
                     <nav class="nav flex-column ">
@@ -28,61 +29,35 @@
                         <li class="nav-item"><a href="">Inicio</a></li>
                         <li>
 
-                            <button onclick="window.crearCategoriaModal.showModal();">Crear
+                            <button class="btn btn-primary" onclick="window.crearCategoriaModal.showModal();">Crear
                                 categoría</button>
-                            </li>
-                        <li>
-                            
-                            <select name="" id="selectCategoria" class="form-select">
-                            </select>
                         </li>
+                        <select name="categoryIdss" id="selectCategoria" class="form-select hidden">
+                    </select>
                     </nav>
+                    <div class="pills" id="pills">
+
+                    </div>
                 </aside>
             </div>
             <div class="col-md-10">
                 <section class="content">
                     <div class="content-title">
                         <h3 id="categoryName">Category Name</h3>
-                        <button onclick="window.editarCategoriaModal.showModal();">Editar nombre de la categoría</button>
+                        <button class="btn btn-primary" onclick="window.editarCategoriaModal.showModal();">Editar nombre de la
+                            categoría</button>
 
                     </div>
                     <div class="main-content ">
                         <div class="row">
                             <div class="col">
-                                <button class="btn-lg btn-dark btn-circle">+</button>
+                                <button class="btn-lg btn-dark btn-circle" id="btnModal">+</button>
                             </div>
-                            <div class="col"><p>Total: <span id="totalNotes"></span></p></div>
+                            <div class="col">
+                                <p>Total: <span id="totalNotes"></span></p>
+                            </div>
                         </div>
                         <div class="lista-notas" id="lista-notas">
-                            <div class="nota pegatina">
-                                <div class="card-body">
-                                    <h3>title #1</h3>
-                                    <p>text content 1</p>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-sm">edit</button>
-                                </div>
-                            </div>
-                            <div class="nota pegatina">
-                                <div class="card-body">
-                                    <h3>title #1</h3>
-                                    <p>text content 1</p>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-sm">edit</button>
-                                </div>
-                            </div>
-                            <div class="nota pegatina">
-                                <div class="card-body">
-                                    <h3>title #1</h3>
-                                    <p>text content 1</p>
-                                </div>
-                                <div class="card-footer">
-                                    <button class="btn btn-sm">edit</button>
-                                </div>
-                            </div>
-                     
-
                         </div>
                     </div>
                 </section>
@@ -93,13 +68,13 @@
     <footer>
         <button id="eliminarCategorie"> EliminarCategoría</button>
     </footer>
-    
+
 
     <!-- Modal crear crear categorias -->
     <dialog id="crearCategoriaModal">
-        <div class="card" >
+        <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Crear Categoría</h5>
+                <h3 class="card-title">Crear Categoría</h3>
                 <form id="crearCategoriaForm">
                     <div class="form-group">
                         <label for="nombreCategoria">Nombre:</label>
@@ -112,43 +87,76 @@
                             <option value="inactivo">Oculto</option>
                         </select>
                     </div>
-                    <div>
-                        <button onclick="window.crearCategoriaModal.close();">Cancelar</button>
-        
-                        <button type="button" id="guardar">Guardar</button>
+                    <div class="card-footere"><br>
+                        <button class="btn btn-secondary" onclick="window.crearCategoriaModal.close();">Cancelar</button>
+
+                        <button type="button" id="guardar" class="btn btn-dark">Guardar</button>
                     </div>
                 </form>
-    
+
             </div>
         </div>
 
-        <script src="./assets/js/notes.js"></script>
-</body>
 </dialog>
 <!--Dialog de editar-->
 
 <dialog id="editarCategoriaModal">
-    <div class="card" >
+    <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Crear Categoría</h5>
+            <h3 class="card-title">Editar Categoría</h3>
             <form id="crearCategoriaForm">
                 <div class="form-group">
                     <label for="nombreCategoria">Nombre:</label>
-                    <input type="text" id="nuevoNombreCategoria" name="nombreCategoria" required>
+                    <input type="text" id="nuevoNombreCategoria" name="nombreCategoria" class="form-control" required>
                 </div>
-                
-                <div>
-                    <button onclick="window.editarCategoriaModal.close();">Cancelar</button>
-    
-                    <button type="button" id="guardarNuevoNombreCategoria">Guardar</button>
+
+                <div class="form-group"><br>
+                    <button class="btn btn-secondary" onclick="window.editarCategoriaModal.close();">Cancelar</button>
+
+                    <button class="btn btn-dark" type="button" id="guardarNuevoNombreCategoria">Guardar</button>
                 </div>
             </form>
 
         </div>
     </div>
-</body>
 </dialog>
 
+<!-- Modal content -->
+<div class="modal" id="myModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Registrar Nota</h3>
+            <span class="close float-end">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form action="" name="formNote">
+                <div class="form-group hidden">
+                    <label for="">Id nota:</label>
+                    <input type="text" name="idNota" class="form-control" id="" placeholder="idNota" readonly >
+                </div>
+                <div class="form-group">
+                    <label for="">Titulo:</label>
+                    <input type="text" name="title" class="form-control" id="" placeholder="Titulo de la nota" >
+                </div>
+                <div class="form-group ">
+                    <label for="">Categoria:</label>
+                    <input type="text" name="categoryId" value="" id="categoryId" class="form-control " readonly>
+                </div>
+                <div class="form-group">
+                    <label for="">Contenido:</label>
+                    <textarea name="content" id="" class="form-control" maxlength="500"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-dark" id="btn-Create">Crear nota</button>
+            <button class="btn btn-dark" id="btn-Update">Actulaizar nota</button>
+        </div>
+    </div>
+</div>
+ <script src="./assets/js/notes.js"></script>
+
+</body>
 
 
 </html>
